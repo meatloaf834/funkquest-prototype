@@ -1,16 +1,17 @@
-function love.load()
-    love.window.setMode(1080,720)
+local game = require("game.init")
 
-    player = {
-        x = 540,
-        y = 360,
-    }
+function love.load()
+    game.load()
+end
+
+function love.resize(w, h)
+    game.resize(w, h)
 end
 
 function love.update(dt)
-    
+    game.update(dt)
 end
 
 function love.draw()
-    love.graphics.circle("fill", player.x, player.y, 100)
+    game.draw()
 end
