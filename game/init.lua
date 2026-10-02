@@ -1,10 +1,9 @@
 local game = {}
 
-local Tween = require("libraries.tween")
 local Project = require("project")
 
 local init = {
-    player = require("game.player.player")
+    player = require("game.player.movement")
 }
 
 function game.load()
@@ -21,7 +20,11 @@ function game.load()
     love.window.setTitle(Project.title)
     Project.width, Project.height = love.graphics.getWidth(), love.graphics.getHeight()
 
-    init.player.load()
+    for i, v in pairs(init) do
+        if v.load then
+            v.load()
+        end
+    end
 end
 
 function game.resize(w, h)
@@ -30,11 +33,19 @@ function game.resize(w, h)
 end
 
 function game.update(dt)
-    init.player.update(dt)
+    for i, v in pairs(init) do
+        if v.update then
+            v.update(dt)
+        end
+    end
 end
 
 function game.draw()
-    init.player.draw()
+    for i, v in pairs(init) do
+        if v.draw then
+            v.draw()
+        end
+    end
 end
 
 return game
